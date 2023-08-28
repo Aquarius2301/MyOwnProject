@@ -119,22 +119,33 @@ public class ReadInput {
      * 
      * @param acceptEmpty accept an empty string (blank)
      * @param mes         the message if the user inputs invalid value
-     * @return
+     * @return a string (if there are some spaces at the beginning or the end, there will be removed automatically)
      */
     public static String readString(boolean acceptEmpty, String mes) {
         do {
-            String s = sc.nextLine();
-            if (!acceptEmpty && s.trim().equals("")) {
+            String s = sc.nextLine().trim();
+            if (!acceptEmpty && s.equals("")) {
                 System.out.print(mes);
             } else
                 return s;
         } while (true);
     }
 
-    public static String readStringLength(int length, String mes) {
+    /**
+     * To input a string with length
+     * 
+     * @param len the length of the string
+     * @param mes the message if the user inputs invalid value
+     * @return a string with the length = len (Not count the space at the beginning and the end)
+     * @throws Exception if len <= 0
+     */
+    public static String readStringLength(int len, String mes) throws Exception {
+        if (len > 0) {
+            throw new Exception("The length of the string must be greater than 0");
+        }
         do {
             String s = readString(false, mes);
-            if (s.length() != length) {
+            if (s.length() != len) {
                 System.out.print(mes);
             } else
                 return s;
