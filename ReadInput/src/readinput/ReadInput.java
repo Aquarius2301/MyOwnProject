@@ -35,7 +35,7 @@ public class ReadInput {
      * To input an integer is greater than a
      *
      * @param a        an integer
-     * @param isEquals true: greater or equals to a, false: greater than a
+     * @param isEquals true: greater than or equals to a, false: greater than a
      * @param mes      the message if the user inputs invalid value
      * @return an integer greater than or equals to a if isEquals = true, an
      *         integer greater than a if isEquals = false
@@ -61,7 +61,7 @@ public class ReadInput {
      * To input an integer is greater than a
      *
      * @param a        an integer
-     * @param isEquals true: less or equals to a, false: less than a
+     * @param isEquals true: less than or equals to a, false: less than a
      * @param mes      the message if the user inputs invalid value
      * @return an integer less than or equals to a if isEquals = true, an
      *         integer less than a if isEquals = false
@@ -86,12 +86,12 @@ public class ReadInput {
     /**
      * To input an integer from a to b
      *
-     * @param a        the min integer
-     * @param b        the max integer
-     * @param isEquals true: less or equals to a, false: less than a
-     * @param mes      the message if the user inputs invalid value
-     * @return an integer less than or equals to a if isEquals = true, an
-     *         integer less than a if isEquals = false
+     * @param a         the min integer
+     * @param b         the max integer
+     * @param isEqualsA true: greater than or equals to a, false: greater than a
+     * @param isEquals  true: less than or equals to b, false: less than b
+     * @param mes       the message if the user inputs invalid value
+     * @return an integer that statisfied with the condition
      */
     public static int readIntFrom(int a, int b, boolean isEqualsA, boolean isEqualsB, String mes) {
         do {
@@ -114,10 +114,37 @@ public class ReadInput {
         } while (true);
     }
 
+    /**
+     * To input a string
+     * 
+     * @param acceptEmpty accept an empty string (blank)
+     * @param mes         the message if the user inputs invalid value
+     * @return
+     */
+    public static String readString(boolean acceptEmpty, String mes) {
+        do {
+            String s = sc.nextLine();
+            if (!acceptEmpty && s.trim().equals("")) {
+                System.out.print(mes);
+            } else
+                return s;
+        } while (true);
+    }
+
+    public static String readStringLength(int length, String mes) {
+        do {
+            String s = readString(false, mes);
+            if (s.length() != length) {
+                System.out.print(mes);
+            } else
+                return s;
+        } while (true);
+    }
+
     public static void main(String[] args) {
         String mes = "Error! Please try again: ";
         System.out.print("Read: ");
-        readIntLessThan(0, true, mes);
+        readString(true, mes);
     }
 
 }
